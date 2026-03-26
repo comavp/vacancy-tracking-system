@@ -11,7 +11,7 @@ public class VacancyScraperService {
 
     private final HHClient hhClient;
 
-    @PostConstruct
+    //@PostConstruct // todo
     public void getVacancies() {
         String response = hhClient.getVacancies("java");
         System.out.println(response);
