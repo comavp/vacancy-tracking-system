@@ -20,6 +20,9 @@ public class Employer {
     private Long id;
 
     @Column
+    private String originalId;
+
+    @Column
     private String name;
 
     @JdbcTypeCode(SqlTypes.JSON)

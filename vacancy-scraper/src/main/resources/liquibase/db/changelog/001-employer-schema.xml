@@ -17,4 +17,12 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="002-add-original-id-column-to-employer" author="comavp">
+        <addColumn tableName="employer">
+            <column name="original_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

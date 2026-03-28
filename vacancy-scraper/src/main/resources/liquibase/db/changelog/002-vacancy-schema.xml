@@ -35,4 +35,12 @@
                 onUpdate="RESTRICT"/>
     </changeSet>
 
+    <changeSet id="003-add-original-id-column-to-vacancy" author="comavp">
+        <addColumn tableName="vacancy">
+            <column name="original_id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

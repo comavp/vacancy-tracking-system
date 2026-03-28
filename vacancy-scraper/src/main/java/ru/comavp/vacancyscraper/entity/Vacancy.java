@@ -20,6 +20,9 @@ public class Vacancy {
     private Long id;
 
     @Column
+    private String originalId;
+
+    @Column
     private String name;
 
     @Column
