@@ -1,8 +1,7 @@
 package ru.comavp.vacancyscraper.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -13,6 +12,9 @@ import java.util.List;
 @Table(name = "key_skill")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class KeySkill {
 
     @Id
@@ -27,5 +29,6 @@ public class KeySkill {
     private String originalData;
 
     @ManyToMany(mappedBy = "keySkills")
+    @Builder.Default
     private List<Vacancy> vacancies = new ArrayList<>();
 }

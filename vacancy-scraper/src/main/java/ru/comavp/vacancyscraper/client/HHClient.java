@@ -3,12 +3,14 @@ package ru.comavp.vacancyscraper.client;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
+import ru.comavp.vacancyscraper.dto.HhVacanciesPageDto;
+import ru.comavp.vacancyscraper.dto.HhVacancyDto;
 
 public interface HHClient {
 
     @GetExchange("/vacancies")
-    String getVacancies(@RequestParam("text") String text);
+    HhVacanciesPageDto getVacancies(@RequestParam("text") String text);
 
     @GetExchange("/vacancies/{id}")
-    String getVacancy(@PathVariable("id") Long id);
+    HhVacancyDto getVacancy(@PathVariable("id") Long id);
 }

@@ -25,4 +25,10 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="009-add-url-column-to-employer" author="comavp">
+        <addColumn tableName="employer">
+            <column name="url" type="VARCHAR(256)"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

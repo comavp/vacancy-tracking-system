@@ -1,8 +1,7 @@
 package ru.comavp.vacancyscraper.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -13,6 +12,9 @@ import java.util.List;
 @Table(name = "vacancy")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vacancy {
 
     @Id
@@ -29,6 +31,7 @@ public class Vacancy {
     private String url;
 
     @Column
+    @Builder.Default
     private Boolean archived = false;
 
     @JdbcTypeCode(SqlTypes.JSON)
@@ -45,5 +48,16 @@ public class Vacancy {
             joinColumns = @JoinColumn(name = "vacancy_id"),
             inverseJoinColumns = @JoinColumn(name = "key_skill_id")
     )
+    @Builder.Default
     private List<KeySkill> keySkills = new ArrayList<>();
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+        employer.getVacancies().add(this);
+    }
+
+    public void addKeySkill(KeySkill keySkill) {
+        keySkills.add(keySkill);
+        keySkill.getVacancies().add(this);
+    }
 }

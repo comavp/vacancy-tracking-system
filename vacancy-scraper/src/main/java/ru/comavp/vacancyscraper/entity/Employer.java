@@ -1,8 +1,7 @@
 package ru.comavp.vacancyscraper.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -13,6 +12,9 @@ import java.util.List;
 @Table(name = "employer")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employer {
 
     @Id
@@ -25,10 +27,14 @@ public class Employer {
     @Column
     private String name;
 
+    @Column
+    private String url;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private String originalData;
 
     @OneToMany(mappedBy = "employer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Vacancy> vacancies = new ArrayList<>();
 }
