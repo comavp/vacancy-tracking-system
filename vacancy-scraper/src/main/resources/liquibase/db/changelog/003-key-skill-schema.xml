@@ -17,4 +17,8 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="012-add-unique-constraint-for-name-to-key-skill" author="comavp">
+        <addUniqueConstraint tableName="key_skill" columnNames="name"/>
+    </changeSet>
+
 </databaseChangeLog>

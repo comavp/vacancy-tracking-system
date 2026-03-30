@@ -31,4 +31,8 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="010-add-unique-constraint-for-original-id-to-employer" author="comavp">
+        <addUniqueConstraint tableName="employer" columnNames="original_id"/>
+    </changeSet>
+
 </databaseChangeLog>

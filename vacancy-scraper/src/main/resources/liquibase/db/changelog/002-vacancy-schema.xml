@@ -43,4 +43,8 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="011-add-unique-constraint-for-original-id-to-vacancy" author="comavp">
+        <addUniqueConstraint tableName="vacancy" columnNames="original_id"/>
+    </changeSet>
+
 </databaseChangeLog>
