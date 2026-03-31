@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 import ru.comavp.vacancyscraper.client.HHClient;
+import ru.comavp.vacancyscraper.config.VacancyScraperProperties;
 import ru.comavp.vacancyscraper.dto.HhEmployerDto;
 import ru.comavp.vacancyscraper.dto.HhVacancyDto;
 import ru.comavp.vacancyscraper.dto.KeySkillDto;
@@ -20,18 +21,17 @@ import ru.comavp.vacancyscraper.repository.VacancyRepository;
 @RequiredArgsConstructor
 public class VacancyScraperService {
 
-    @Value("${search-query:java}")
-    private String searchQuery;
-
     private final HHClient hhClient;
     private final EmployerRepository employerRepository;
     private final VacancyRepository vacancyRepository;
     private final KeySkillRepository keySkillRepository;
     private final TransactionTemplate transactionTemplate;
+    private final VacancyScraperProperties properties;
 
     @PostConstruct // todo
     public void getVacancies() {
-        var response = hhClient.getVacancies(searchQuery);
+        var response = hhClient.getVacancies(properties.getPage(), properties.getPerPage(),
+                properties.getText(), properties.getProfessionalRole(), properties.getVacancySearchOder());
         transactionTemplate.execute(status -> {
             response.items().forEach(hhVacancyDto -> {
                 var employerDto = hhVacancyDto.employer();

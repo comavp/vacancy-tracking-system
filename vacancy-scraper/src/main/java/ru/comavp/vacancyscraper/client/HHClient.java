@@ -9,7 +9,11 @@ import ru.comavp.vacancyscraper.dto.HhVacancyDto;
 public interface HHClient {
 
     @GetExchange("/vacancies")
-    HhVacanciesPageDto getVacancies(@RequestParam("text") String text);
+    HhVacanciesPageDto getVacancies(@RequestParam("page") Integer page,
+                                    @RequestParam("per_page") Integer perPage,
+                                    @RequestParam("text") String text,
+                                    @RequestParam("professional_role") Integer professionalRole,
+                                    @RequestParam("vacancy_search_order") String vacancySearchOrder);
 
     @GetExchange("/vacancies/{id}")
     HhVacancyDto getVacancy(@PathVariable("id") Long id);
