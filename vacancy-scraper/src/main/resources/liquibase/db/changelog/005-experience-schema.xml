@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="014-create-experience-table" author="comavp">
+        <createTable tableName="experience">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="original_id" type="VARCHAR(64)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="015-insert-experience-data" author="comavp">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="experience"/>
+        </preConditions>
+        <insert tableName="experience">
+            <column name="original_id" value="noExperience"/>
+            <column name="name" value="Нет опыта"/>
+        </insert>
+        <insert tableName="experience">
+            <column name="original_id" value="between1And3"/>
+            <column name="name" value="От 1 года до 3 лет"/>
+        </insert>
+        <insert tableName="experience">
+            <column name="original_id" value="between3And6"/>
+            <column name="name" value="От 3 до 6 лет"/>
+        </insert>
+        <insert tableName="experience">
+            <column name="original_id" value="moreThan6"/>
+            <column name="name" value="Более 6 лет"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

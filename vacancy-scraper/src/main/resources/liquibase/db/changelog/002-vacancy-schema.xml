@@ -47,4 +47,10 @@
         <addUniqueConstraint tableName="vacancy" columnNames="original_id"/>
     </changeSet>
 
+    <changeSet id="016-add-experience-id-column-to-vacancy" author="comavp">
+        <addColumn tableName="vacancy">
+            <column name="experience_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

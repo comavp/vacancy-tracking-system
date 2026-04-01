@@ -9,5 +9,6 @@
     <include file="liquibase/db/changelog/002-vacancy-schema.xml"/>
     <include file="liquibase/db/changelog/003-key-skill-schema.xml"/>
     <include file="liquibase/db/changelog/004-vacancy-key-skill-schema.xml"/>
+    <include file="liquibase/db/changelog/005-experience-schema.xml"/>
 
 </databaseChangeLog>

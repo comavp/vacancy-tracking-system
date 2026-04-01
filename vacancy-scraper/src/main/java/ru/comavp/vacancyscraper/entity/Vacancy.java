@@ -51,6 +51,10 @@ public class Vacancy {
     @Builder.Default
     private List<KeySkill> keySkills = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "experience_id")
+    private Experience experience;
+
     public void setEmployer(Employer employer) {
         this.employer = employer;
         employer.getVacancies().add(this);

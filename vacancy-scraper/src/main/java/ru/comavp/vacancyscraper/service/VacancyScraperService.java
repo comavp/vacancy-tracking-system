@@ -2,7 +2,6 @@ package ru.comavp.vacancyscraper.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 import ru.comavp.vacancyscraper.client.HHClient;
@@ -14,6 +13,7 @@ import ru.comavp.vacancyscraper.entity.Employer;
 import ru.comavp.vacancyscraper.entity.KeySkill;
 import ru.comavp.vacancyscraper.entity.Vacancy;
 import ru.comavp.vacancyscraper.repository.EmployerRepository;
+import ru.comavp.vacancyscraper.repository.ExperienceRepository;
 import ru.comavp.vacancyscraper.repository.KeySkillRepository;
 import ru.comavp.vacancyscraper.repository.VacancyRepository;
 
@@ -25,6 +25,7 @@ public class VacancyScraperService {
     private final EmployerRepository employerRepository;
     private final VacancyRepository vacancyRepository;
     private final KeySkillRepository keySkillRepository;
+    private final ExperienceRepository experienceRepository;
     private final TransactionTemplate transactionTemplate;
     private final VacancyScraperProperties properties;
 
