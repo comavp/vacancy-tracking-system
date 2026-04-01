@@ -6,16 +6,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 import ru.comavp.vacancyscraper.client.HHClient;
 import ru.comavp.vacancyscraper.config.VacancyScraperProperties;
+import ru.comavp.vacancyscraper.dto.HHExperienceDto;
 import ru.comavp.vacancyscraper.dto.HhEmployerDto;
 import ru.comavp.vacancyscraper.dto.HhVacancyDto;
 import ru.comavp.vacancyscraper.dto.KeySkillDto;
 import ru.comavp.vacancyscraper.entity.Employer;
+import ru.comavp.vacancyscraper.entity.Experience;
 import ru.comavp.vacancyscraper.entity.KeySkill;
 import ru.comavp.vacancyscraper.entity.Vacancy;
 import ru.comavp.vacancyscraper.repository.EmployerRepository;
 import ru.comavp.vacancyscraper.repository.ExperienceRepository;
 import ru.comavp.vacancyscraper.repository.KeySkillRepository;
 import ru.comavp.vacancyscraper.repository.VacancyRepository;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +36,11 @@ public class VacancyScraperService {
 
     @PostConstruct // todo
     public void getVacancies() {
+        Map<String, Experience> originalIdToExperienceMap = experienceRepository.findAll()
+                .stream()
+                .collect(Collectors.toMap(
+                        Experience::getOriginalId,
+                        item -> item));
         var response = hhClient.getVacancies(properties.getPage(), properties.getPerPage(),
                 properties.getText(), properties.getProfessionalRole(), properties.getVacancySearchOder());
         transactionTemplate.execute(status -> {
@@ -48,6 +58,7 @@ public class VacancyScraperService {
                         .orElseGet(() -> {
                             var vacancy = mapToVacancy(hhVacancyDto);
                             vacancy.setEmployer(existingEmployer);
+                            vacancy.setExperience(originalIdToExperienceMap.get(hhVacancyDto.experience().id()));
                             keySkillsList.forEach(vacancy::addKeySkill);
                             return vacancyRepository.save(vacancy);
                         });

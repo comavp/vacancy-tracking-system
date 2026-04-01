@@ -8,5 +8,6 @@ public record HhVacancyDto(
         String alternateUrl,
         Boolean archived,
         HhEmployerDto employer,
+        HHExperienceDto experience,
         List<KeySkillDto> keySkills) {
 }
