@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 import ru.comavp.vacancyscraper.client.HHClient;
 import ru.comavp.vacancyscraper.config.VacancyScraperProperties;
-import ru.comavp.vacancyscraper.dto.HHExperienceDto;
 import ru.comavp.vacancyscraper.dto.HhEmployerDto;
 import ru.comavp.vacancyscraper.dto.HhVacancyDto;
 import ru.comavp.vacancyscraper.dto.KeySkillDto;
