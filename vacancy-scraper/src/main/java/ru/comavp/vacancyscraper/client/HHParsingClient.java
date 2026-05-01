@@ -55,7 +55,7 @@ public class HHParsingClient implements HHClient {
         return 0;
     }
 
-    public static int parsePageCount(Document doc) {
+    private int parsePageCount(Document doc) {
         // Собираем все pager-page элементы (кроме кнопки "вперёд")
         Elements pageLinks = doc.select("a[data-qa=pager-page]");
         int maxPage = 0;
@@ -70,7 +70,7 @@ public class HHParsingClient implements HHClient {
         return maxPage > 0 ? maxPage : 1;
     }
 
-    public static List<HhVacancyDto> parseVacancies(Document doc) {
+    private List<HhVacancyDto> parseVacancies(Document doc) {
         List<HhVacancyDto> result = new ArrayList<>();
 
         // Ссылка на вакансию: тег <a> с data-qa="serp-item__title"
@@ -123,7 +123,7 @@ public class HHParsingClient implements HHClient {
         return result;
     }
 
-    private static HHExperienceDto parseExperience(Element vacancyCard) {
+    private HHExperienceDto parseExperience(Element vacancyCard) {
         if (vacancyCard == null) return null;
 
         // Ищем span с data-qa, начинающимся на "vacancy-serp__vacancy-work-experience-"
@@ -137,13 +137,13 @@ public class HHParsingClient implements HHClient {
         return new HHExperienceDto(id, name);
     }
 
-    private static String extractId(String url) {
+    private String extractId(String url) {
         Pattern pattern = Pattern.compile("/vacancy/(\\d+)");
         Matcher matcher = pattern.matcher(url);
         return matcher.find() ? matcher.group(1) : "";
     }
 
-    private static String extractIdFromEmployerUrl(String url) {
+    private String extractIdFromEmployerUrl(String url) {
         Pattern pattern = Pattern.compile("/employer/(\\d+)");
         Matcher matcher = pattern.matcher(url);
         return matcher.find() ? matcher.group(1) : "";
@@ -166,7 +166,7 @@ public class HHParsingClient implements HHClient {
         }
     }
 
-    public static List<KeySkillDto> parseSkills(Document doc) {
+    private List<KeySkillDto> parseSkills(Document doc) {
         List<String> skills = new ArrayList<>();
         // Ищем все li с data-qa="skills-element", внутри div с классом метки навыка
         Elements skillElements = doc.select("li[data-qa=skills-element] div.magritte-tag__label___YHV-o_5-2-2");
