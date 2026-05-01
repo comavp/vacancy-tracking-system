@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+allprojects {
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+}
+
 dependencies {
     implementation platform('org.springframework.boot:spring-boot-dependencies:3.5.11')
 
@@ -20,6 +26,8 @@ dependencies {
 
     implementation 'org.liquibase:liquibase-core'
     implementation 'net.lbruun.springboot:preliquibase-spring-boot-autoconfigure:1.6.1'
+
+    implementation 'org.jsoup:jsoup:1.22.2'
 
     runtimeOnly 'org.postgresql:postgresql'
 

@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-import ru.comavp.vacancyscraper.client.HHClient;
+import ru.comavp.vacancyscraper.client.HHAPIClient;
 
 @Configuration
 @EnableConfigurationProperties(VacancyScraperProperties.class)
@@ -28,7 +28,7 @@ public class WebConfig {
     }
 
     @Bean
-    public HHClient hhClient(ObjectMapper mapper) {
+    public HHAPIClient hhClient(ObjectMapper mapper) {
         String baseUrl = "https://api.hh.ru";
         int size = (int) DataSize.ofMegabytes(16).toBytes();
         return HttpServiceProxyFactory
@@ -43,6 +43,6 @@ public class WebConfig {
                                 .build())
                         .build()))
                 .build()
-                .createClient(HHClient.class);
+                .createClient(HHAPIClient.class);
     }
 }
